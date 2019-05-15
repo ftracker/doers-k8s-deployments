@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: doers-service
+spec:
+  selector:
+    app: doers-service
+  ports:
+    -  protocol: TCP
+       port: 80
+       targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doers-service
+  labels:
+    app: doers-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doers-service
+  template:
+    metadata:
+      labels:
+        app: doers-service
+    spec:
+      containers:
+        - image: dboss/doers
+          name: doers-service
+          env:
+            - name: JAVA_OPTS
+              value: "-XX:MaxRAMPercentage=65"
+          resources:
+            requests:
+              memory: "370Mi"
+              cpu: "150m"
+            limits:
+              memory: "400Mi"
+          volumeMounts:
+            - name: config
+              mountPath: "/app/config"
+              readOnly: true
+      volumes:
+        - name: config
+          secret:
+            secretName: doers-service-config
