@@ -44,7 +44,7 @@ spec:
         app: doers-service
     spec:
       containers:
-        - image: dboss/doers:6
+        - image: dboss/doers:8
           name: doers-service
           env:
             - name: JAVA_OPTS
