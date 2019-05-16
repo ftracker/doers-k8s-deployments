@@ -52,21 +52,21 @@ spec:
           resources:
             requests:
               memory: "500Mi"
-              cpu: "150m"
+              cpu: "300m"
             limits:
               memory: "600Mi"
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 10
             periodSeconds: 7
             successThreshold: 1
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 50
+            initialDelaySeconds: 45
             periodSeconds: 10
           volumeMounts:
             - name: config
