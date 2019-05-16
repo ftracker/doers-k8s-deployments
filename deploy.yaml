@@ -51,10 +51,10 @@ spec:
               value: "-XX:MaxRAMPercentage=65"
           resources:
             requests:
-              memory: "370Mi"
+              memory: "500Mi"
               cpu: "150m"
             limits:
-              memory: "400Mi"
+              memory: "600Mi"
           readinessProbe:
             httpGet:
               path: /actuator/health
